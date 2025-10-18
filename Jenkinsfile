@@ -6,19 +6,28 @@ pipeline {
     stages {
         stage('Deploy To Kubernetes') {
             steps {
-                   withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'EKS-17', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', serverUrl: 'https://7E9785EB987B385C3D8D06FF004D3470.gr7.ap-south-1.eks.amazonaws.com']]) {
-                    sh "kubectl apply -f deployment-service.yml"
+                script {
+                    // Retrieve DockerHub credentials (username + password)
+                    withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    // Replace ${DOCKER_USER} in deployment YAML
+                        sh """
+                            envsubst < deployment-service.yml > temp.yml && mv temp.yml deployment-service.yml
+                        """
+                        // Apply the dynamically updated YAML to Kubernetes
+                       
+                            sh "kubectl apply -f deployment-service.yml"
+                        
                     }
+                }
             }
         }
-        
-        stage('verify Deployment') {
+
+        stage('Verify Deployment') {
             steps {
-               withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'EKS-1', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', serverUrl: 'https://7E9785EB987B385C3D8D06FF004D3470.gr7.ap-south-1.eks.amazonaws.com']]) {
-                         sh "kubectl get svc -n webapps"
-                }
+                
+                    sh "kubectl get svc -n webapps"
+                
             }
         }
     }
 }
-
