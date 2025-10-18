@@ -1,3 +1,10 @@
+## Clone The Repo Locally - 
+Please First Fork the repository and then try to clone it.
+```bash
+git clone https://github.com/sudhanshuvlog/MicroservicesApp.git MicroservicesApp
+cd MicroservicesApp
+git switch Infra-Steps  # You can switch to the required branch with `switch` command.
+```
 ## First Create a user in AWS IAM with any name
 ## Attach Policies to the newly created user
 ## below policies
