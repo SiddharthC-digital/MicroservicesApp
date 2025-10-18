@@ -7,21 +7,25 @@ pipeline {
         stage('Build & Tag Docker Image') {
             steps {
                 script {
+                   withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t jinny1/paymentservice:latest ."
+                        sh "docker build -t ${DOCKER_USER}/paymentservice:latest ."
                     }
                 }
             }
         }
-        
+      }
         stage('Push Docker Image') {
             steps {
                 script {
+                   withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push jinny1/paymentservice:latest "
+                        sh "docker push ${DOCKER_USER}/paymentservice:latest "
                     }
                 }
             }
         }
     }
 }
+}
+
