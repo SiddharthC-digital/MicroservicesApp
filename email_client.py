@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import grpc
-
+import grpc 
+#sample change
 import demo_pb2
 import demo_pb2_grpc
 
@@ -37,3 +37,4 @@ def send_confirmation_email(email, order):
 
 if __name__ == '__main__':
   logger.info('Client for email service.')
+
