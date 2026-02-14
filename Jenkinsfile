@@ -16,11 +16,11 @@ pipeline {
                         // Apply the dynamically updated YAML to Kubernetes
                         withKubeCredentials(kubectlCredentials: [[
                             caCertificate: '', 
-                            clusterName: 'EKS-14', 
+                            clusterName: 'EKS-40-14', 
                             contextName: '', 
                             credentialsId: 'k8-token', 
                             namespace: 'webapps', 
-                            serverUrl: 'https://B15B8FE0912D99E23CAA5BF2CBA11F3F.gr7.ap-south-1.eks.amazonaws.com'
+                            serverUrl: 'https://14F11766A579EC033E46F027E022651B.gr7.ap-south-1.eks.amazonaws.com'
                         ]]) {
                             sh "kubectl apply -f deployment-service.yml"
                         }
@@ -33,11 +33,11 @@ pipeline {
             steps {
                 withKubeCredentials(kubectlCredentials: [[
                     caCertificate: '', 
-                    clusterName: 'EKS-14', 
+                    clusterName: 'EKS-40-14', 
                     contextName: '', 
                     credentialsId: 'k8-token', 
                     namespace: 'webapps', 
-                    serverUrl: 'https://B15B8FE0912D99E23CAA5BF2CBA11F3F.gr7.ap-south-1.eks.amazonaws.com'
+                    serverUrl: 'https://14F11766A579EC033E46F027E022651B.gr7.ap-south-1.eks.amazonaws.com'
                 ]]) {
                     sh "kubectl get svc -n webapps"
                 }
@@ -46,4 +46,5 @@ pipeline {
     }
 
 }
+
 
