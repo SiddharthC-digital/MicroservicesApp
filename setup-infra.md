@@ -1,5 +1,7 @@
 ## Clone The Repo Locally - 
 Please First Fork the repository and then try to clone it.
+While performing the fork operation, please ensure that you do not select this checkbox, as it will result in only the main branch being copied. If the checkbox is left unselected, all branches will be included in the fork. <img width="524" height="82" alt="image" src="https://github.com/user-attachments/assets/2f79f03d-babe-4057-95a4-137a461affa8" />
+
 ```bash
 git clone https://github.com/sudhanshuvlog/MicroservicesApp.git MicroservicesApp
 cd MicroservicesApp
@@ -177,3 +179,4 @@ subjects:
 ### Generate token using service account in the namespace
 
 [Create Token](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#:~:text=To%20create%20a%20non%2Dexpiring,with%20that%20generated%20token%20data.)
+
